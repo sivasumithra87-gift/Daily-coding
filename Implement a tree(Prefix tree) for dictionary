@@ -1,0 +1,45 @@
+class TrieNode{
+    TrieNode[] children=new TrieNode[26];
+    boolean isEndofWord=false;
+}
+class trie{
+    private TrieNode root;
+    public trie(){
+        root=new TrieNode();
+    }
+public void insert(String word){
+    TrieNode current=root;
+    for(int i=0;i<word.length();i++){
+        int index=word.charAt(i)-'a';
+        if(current.children[index]==null){
+            current.children[index]=new TrieNode();
+        }
+        current=current.children[index];
+    }
+    current.isEndofWord=true;
+}
+
+public boolean search(String word){
+    TrieNode current=root;
+    for(int i=0;i<word.length();i++){
+        int index=word.charAt(i)-'a';
+        if(current.children[index]==null)
+            return false;
+        current=current.children[index];
+    }
+    return current.isEndofWord;
+}
+}
+public class Trienode3{
+    public static void main(String[] args) {
+        trie dictionary=new trie();
+        dictionary.insert("cat");
+        dictionary.insert("car");
+        dictionary.insert("care");
+        System.out.println(dictionary.search("cat"));
+        System.out.println(dictionary.search("car"));
+
+
+
+    }
+}
